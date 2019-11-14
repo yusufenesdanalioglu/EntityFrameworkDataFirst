@@ -1,0 +1,10 @@
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EFDataFirstCRUDIslemleri.exe.config
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EFDataFirstCRUDIslemleri.exe
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EFDataFirstCRUDIslemleri.pdb
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EntityFramework.dll
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EntityFramework.xml
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\obj\Debug\EFDataFirstCRUDIslemleri.exe
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\obj\Debug\EFDataFirstCRUDIslemleri.pdb
+c:\users\yed_3\onedrive\belgeler\visual studio 2015\Projects\EFDataFirstCRUDIslemleri\EFDataFirstCRUDIslemleri\obj\Debug\EFDataFirstCRUDIslemleri.csprojResolveAssemblyReference.cache

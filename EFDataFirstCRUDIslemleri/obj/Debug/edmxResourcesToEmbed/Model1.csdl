@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="FilmBilgisi">
+    <Key>
+      <PropertyRef Name="FilmId" />
+    </Key>
+    <Property Name="FilmId" Type="Int32" Nullable="false" />
+    <Property Name="FilmAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FilmSeansId" Type="Int32" Nullable="false" />
+    <Property Name="UcretId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SeansBilgisi" Relationship="Self.FK_FilmBilgisi_SeansBilgisi" FromRole="FilmBilgisi" ToRole="SeansBilgisi" />
+    <NavigationProperty Name="Ucret" Relationship="Self.FK_FilmBilgisi_Ucret" FromRole="FilmBilgisi" ToRole="Ucret" />
+  </EntityType>
+  <EntityType Name="SeansBilgisi">
+    <Key>
+      <PropertyRef Name="SeansId" />
+    </Key>
+    <Property Name="SeansId" Type="Int32" Nullable="false" />
+    <Property Name="SeansSaat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="FilmBilgisi" Relationship="Self.FK_FilmBilgisi_SeansBilgisi" FromRole="SeansBilgisi" ToRole="FilmBilgisi" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Ucret">
+    <Key>
+      <PropertyRef Name="UcretId" />
+    </Key>
+    <Property Name="UcretId" Type="Int32" Nullable="false" />
+    <Property Name="Ucret1" Type="Double" Nullable="false" />
+    <NavigationProperty Name="FilmBilgisi" Relationship="Self.FK_FilmBilgisi_Ucret" FromRole="Ucret" ToRole="FilmBilgisi" />
+  </EntityType>
+  <Association Name="FK_FilmBilgisi_SeansBilgisi">
+    <End Role="SeansBilgisi" Type="Self.SeansBilgisi" Multiplicity="1" />
+    <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SeansBilgisi">
+        <PropertyRef Name="SeansId" />
+      </Principal>
+      <Dependent Role="FilmBilgisi">
+        <PropertyRef Name="FilmSeansId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FilmBilgisi_Ucret">
+    <End Role="Ucret" Type="Self.Ucret" Multiplicity="1" />
+    <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ucret">
+        <PropertyRef Name="UcretId" />
+      </Principal>
+      <Dependent Role="FilmBilgisi">
+        <PropertyRef Name="UcretId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SinemaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="FilmBilgisi" EntityType="Self.FilmBilgisi" />
+    <EntitySet Name="SeansBilgisi" EntityType="Self.SeansBilgisi" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Ucret" EntityType="Self.Ucret" />
+    <AssociationSet Name="FK_FilmBilgisi_SeansBilgisi" Association="Self.FK_FilmBilgisi_SeansBilgisi">
+      <End Role="SeansBilgisi" EntitySet="SeansBilgisi" />
+      <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FilmBilgisi_Ucret" Association="Self.FK_FilmBilgisi_Ucret">
+      <End Role="Ucret" EntitySet="Ucret" />
+      <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SinemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FilmBilgisi">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Name="FilmId" Type="int" Nullable="false" />
+          <Property Name="FilmAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FilmSeansId" Type="int" Nullable="false" />
+          <Property Name="UcretId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SeansBilgisi">
+          <Key>
+            <PropertyRef Name="SeansId" />
+          </Key>
+          <Property Name="SeansId" Type="int" Nullable="false" />
+          <Property Name="SeansSaat" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Ucret">
+          <Key>
+            <PropertyRef Name="UcretId" />
+          </Key>
+          <Property Name="UcretId" Type="int" Nullable="false" />
+          <Property Name="Ucret" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FilmBilgisi_SeansBilgisi">
+          <End Role="SeansBilgisi" Type="Self.SeansBilgisi" Multiplicity="1" />
+          <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeansBilgisi">
+              <PropertyRef Name="SeansId" />
+            </Principal>
+            <Dependent Role="FilmBilgisi">
+              <PropertyRef Name="FilmSeansId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmBilgisi_Ucret">
+          <End Role="Ucret" Type="Self.Ucret" Multiplicity="1" />
+          <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ucret">
+              <PropertyRef Name="UcretId" />
+            </Principal>
+            <Dependent Role="FilmBilgisi">
+              <PropertyRef Name="UcretId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SinemaModelStoreContainer">
+          <EntitySet Name="FilmBilgisi" EntityType="Self.FilmBilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SeansBilgisi" EntityType="Self.SeansBilgisi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ucret" EntityType="Self.Ucret" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FilmBilgisi_SeansBilgisi" Association="Self.FK_FilmBilgisi_SeansBilgisi">
+            <End Role="SeansBilgisi" EntitySet="SeansBilgisi" />
+            <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmBilgisi_Ucret" Association="Self.FK_FilmBilgisi_Ucret">
+            <End Role="Ucret" EntitySet="Ucret" />
+            <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SinemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FilmBilgisi">
+          <Key>
+            <PropertyRef Name="FilmId" />
+          </Key>
+          <Property Name="FilmId" Type="Int32" Nullable="false" />
+          <Property Name="FilmAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FilmSeansId" Type="Int32" Nullable="false" />
+          <Property Name="UcretId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SeansBilgisi" Relationship="Self.FK_FilmBilgisi_SeansBilgisi" FromRole="FilmBilgisi" ToRole="SeansBilgisi" />
+          <NavigationProperty Name="Ucret" Relationship="Self.FK_FilmBilgisi_Ucret" FromRole="FilmBilgisi" ToRole="Ucret" />
+        </EntityType>
+        <EntityType Name="SeansBilgisi">
+          <Key>
+            <PropertyRef Name="SeansId" />
+          </Key>
+          <Property Name="SeansId" Type="Int32" Nullable="false" />
+          <Property Name="SeansSaat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="FilmBilgisi" Relationship="Self.FK_FilmBilgisi_SeansBilgisi" FromRole="SeansBilgisi" ToRole="FilmBilgisi" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Ucret">
+          <Key>
+            <PropertyRef Name="UcretId" />
+          </Key>
+          <Property Name="UcretId" Type="Int32" Nullable="false" />
+          <Property Name="Ucret1" Type="Double" Nullable="false" />
+          <NavigationProperty Name="FilmBilgisi" Relationship="Self.FK_FilmBilgisi_Ucret" FromRole="Ucret" ToRole="FilmBilgisi" />
+        </EntityType>
+        <Association Name="FK_FilmBilgisi_SeansBilgisi">
+          <End Role="SeansBilgisi" Type="Self.SeansBilgisi" Multiplicity="1" />
+          <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SeansBilgisi">
+              <PropertyRef Name="SeansId" />
+            </Principal>
+            <Dependent Role="FilmBilgisi">
+              <PropertyRef Name="FilmSeansId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmBilgisi_Ucret">
+          <End Role="Ucret" Type="Self.Ucret" Multiplicity="1" />
+          <End Role="FilmBilgisi" Type="Self.FilmBilgisi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ucret">
+              <PropertyRef Name="UcretId" />
+            </Principal>
+            <Dependent Role="FilmBilgisi">
+              <PropertyRef Name="UcretId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SinemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FilmBilgisi" EntityType="Self.FilmBilgisi" />
+          <EntitySet Name="SeansBilgisi" EntityType="Self.SeansBilgisi" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Ucret" EntityType="Self.Ucret" />
+          <AssociationSet Name="FK_FilmBilgisi_SeansBilgisi" Association="Self.FK_FilmBilgisi_SeansBilgisi">
+            <End Role="SeansBilgisi" EntitySet="SeansBilgisi" />
+            <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmBilgisi_Ucret" Association="Self.FK_FilmBilgisi_Ucret">
+            <End Role="Ucret" EntitySet="Ucret" />
+            <End Role="FilmBilgisi" EntitySet="FilmBilgisi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SinemaModelStoreContainer" CdmEntityContainer="SinemaEntities">
+          <EntitySetMapping Name="FilmBilgisi">
+            <EntityTypeMapping TypeName="SinemaModel.FilmBilgisi">
+              <MappingFragment StoreEntitySet="FilmBilgisi">
+                <ScalarProperty Name="FilmId" ColumnName="FilmId" />
+                <ScalarProperty Name="FilmAdı" ColumnName="FilmAdı" />
+                <ScalarProperty Name="FilmSeansId" ColumnName="FilmSeansId" />
+                <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SeansBilgisi">
+            <EntityTypeMapping TypeName="SinemaModel.SeansBilgisi">
+              <MappingFragment StoreEntitySet="SeansBilgisi">
+                <ScalarProperty Name="SeansId" ColumnName="SeansId" />
+                <ScalarProperty Name="SeansSaat" ColumnName="SeansSaat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="SinemaModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ucret">
+            <EntityTypeMapping TypeName="SinemaModel.Ucret">
+              <MappingFragment StoreEntitySet="Ucret">
+                <ScalarProperty Name="UcretId" ColumnName="UcretId" />
+                <ScalarProperty Name="Ucret1" ColumnName="Ucret" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
